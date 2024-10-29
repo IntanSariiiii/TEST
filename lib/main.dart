@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
         ),
@@ -40,14 +39,48 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            // Tambahkan navigasi kembali di sini
-          },
-        ),
         title: Text(widget.title),
         centerTitle: true,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                // Navigasi atau fungsi saat Home diklik
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                // Navigasi atau fungsi saat Settings diklik
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
+              onTap: () {
+                // Navigasi atau fungsi saat About diklik
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -101,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const SizedBox(width: 16.0),
                   Flexible(
                     child: _buildRecipeCard(
-                      title: 'READ BEAN BOBA MILK',
+                      title: 'RED BEAN BOBA MILK',
                       rating: 5.0,
                       time: '7 mnt',
                       price: '450 rb',
@@ -148,16 +181,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   sellerName,
                   style: const TextStyle(fontSize: 7.0, fontWeight: FontWeight.bold),
                 ),
-              const Spacer(),
-              if (isVerified)
-                Container(
-                  padding: const EdgeInsets.all(2.0), // Padding untuk memberikan efek lingkaran
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.blue, // Warna latar belakang
+                const Spacer(),
+                if (isVerified)
+                  Container(
+                    padding: const EdgeInsets.all(2.0),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue,
+                    ),
+                    child: const Icon(Icons.check, color: Colors.white, size: 7.0),
                   ),
-                  child: const Icon(Icons.check, color: Colors.white, size: 7.0), // Ikon centang putih
-                ),
               ],
             ),
           ),
@@ -195,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.remove_red_eye, color: Colors.grey, size: 16.0), // Ikon yang diperbarui
+                        const Icon(Icons.remove_red_eye, color: Colors.grey, size: 16.0),
                         const SizedBox(width: 4.0),
                         Text(price),
                       ],
@@ -220,4 +253,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
